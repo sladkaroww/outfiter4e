@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Гардероб</title>
+<link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500;12..96,800&family=Instrument+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#F3F4F8;--surface:#fff;--ink:#15161F;--muted:#686B7E;--line:#DDE0EA;--accent:#3340FF;--on-accent:#fff;--shadow:0 12px 40px rgba(21,22,31,.14);color-scheme:light;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#11121A;--surface:#1B1D29;--ink:#F1F2F8;--muted:#9A9DB2;--line:#2D3042;--accent:#7C86FF;--on-accent:#0E1030;--shadow:0 12px 40px rgba(0,0,0,.5);color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#11121A;--surface:#1B1D29;--ink:#F1F2F8;--muted:#9A9DB2;--line:#2D3042;--accent:#7C86FF;--on-accent:#0E1030;--shadow:0 12px 40px rgba(0,0,0,.5);color-scheme:dark}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:400 16px/1.5 "Instrument Sans",system-ui,sans-serif;-webkit-font-smoothing:antialiased}
+button,input,select{font:inherit;color:inherit}
+button,a{cursor:pointer}
+a{color:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+[hidden]{display:none!important}
+.wrap{max-width:1080px;margin:0 auto;padding:24px 20px 120px}
+.top{display:flex;justify-content:space-between;align-items:center;gap:12px}
+.logo{font:800 22px "Bricolage Grotesque",system-ui,sans-serif;letter-spacing:-.03em;text-decoration:none}
+.pill{border:1px solid var(--line);background:var(--surface);border-radius:999px;padding:8px 18px;font-weight:500;text-decoration:none;display:inline-block}
+.btn{background:var(--accent);color:var(--on-accent);border:0;border-radius:999px;padding:14px 26px;font-weight:600;text-decoration:none;display:inline-block}
+.btn.alt{background:none;color:var(--ink);border:1px solid var(--line)}
+h1,h2{font-family:"Bricolage Grotesque",system-ui,sans-serif;letter-spacing:-.04em;margin:0}
+.hero{display:grid;gap:36px;padding:56px 0 72px;align-items:center}
+@media (min-width:860px){.hero{grid-template-columns:1.15fr .85fr}}
+.hero h1{font-size:clamp(48px,11vw,104px);line-height:.92;font-weight:800}
+.hero p{font-size:19px;color:var(--muted);max-width:30em;margin:22px 0 28px}
+.cta{display:flex;gap:12px;flex-wrap:wrap}
+.demo{max-width:340px;width:100%;justify-self:center}
+.demo .frame{box-shadow:var(--shadow)}
+.demo p{font-size:14px;margin:12px 2px;color:var(--muted)}
+.steps{list-style:none;margin:0;padding:0;border-top:1px solid var(--line)}
+.steps li{display:grid;grid-template-columns:64px 1fr;gap:8px 16px;padding:28px 0;border-bottom:1px solid var(--line)}
+.steps b{font:800 44px/1 "Bricolage Grotesque",system-ui,sans-serif;color:var(--accent)}
+.steps h3{margin:0;font:600 22px "Bricolage Grotesque",system-ui,sans-serif}
+.steps p{margin:4px 0 0;color:var(--muted);max-width:36em}
+.band{padding:88px 0 40px}
+.band h2{font-size:clamp(34px,7vw,64px);line-height:1;font-weight:800;max-width:14em;margin-bottom:26px}
+.foot{color:var(--muted);font-size:14px;padding-top:56px}
+.appt h1{font-size:clamp(44px,10vw,84px);line-height:.92;font-weight:800;margin-top:22px}
+.sub{color:var(--muted);margin:10px 0 0}
+.tabs{display:inline-flex;background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:4px;margin:24px 0 14px}
+.tabs button{border:0;background:none;padding:9px 22px;border-radius:999px;font-weight:600;color:var(--muted)}
+.tabs button[aria-selected="true"]{background:var(--ink);color:var(--bg)}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:14px}
+.tools .btn{padding:11px 20px}
+.chips{display:flex;gap:8px;overflow-x:auto;padding:2px 0 18px;scrollbar-width:none}
+.chip{flex:none;border:1px solid var(--line);background:none;border-radius:999px;padding:6px 14px;color:var(--muted)}
+.chip[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--on-accent)}
+.grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+@media (min-width:700px){.grid{grid-template-columns:repeat(3,1fr);gap:20px}}
+@media (min-width:980px){.grid{grid-template-columns:repeat(4,1fr)}}
+.card{border:0;padding:0;background:none;text-align:left;display:block;width:100%}
+.frame{aspect-ratio:3/4;border-radius:22px;overflow:hidden;background:var(--surface);border:1px solid var(--line);position:relative}
+.frame.item{aspect-ratio:1/1;border-radius:16px}
+.frame.sq{aspect-ratio:1/1}
+.collage{position:absolute;inset:0;display:grid;grid-template-columns:1fr 1fr;grid-auto-rows:1fr}
+.collage .tile:last-child:nth-child(odd){grid-column:1/-1}
+.tile{display:grid;place-items:center;position:relative;overflow:hidden}
+.tile img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.tile svg{width:42%;height:42%;opacity:.9;max-height:70px}
+.card h3{margin:10px 2px 0;font:600 16px/1.3 "Bricolage Grotesque",system-ui,sans-serif}
+.card p{margin:0 2px;color:var(--muted);font-size:14px}
+.empty{grid-column:1/-1;border:1.5px dashed var(--line);border-radius:22px;padding:48px 20px;text-align:center;color:var(--muted)}
+.fab{position:fixed;right:20px;bottom:calc(20px + env(safe-area-inset-bottom,0px));background:var(--accent);color:var(--on-accent);border:0;border-radius:999px;padding:16px 26px;font-weight:600;box-shadow:var(--shadow);z-index:5}
+.veil{position:fixed;inset:0;background:rgba(10,10,20,.55);display:none;align-items:flex-end;justify-content:center;z-index:20}
+.veil.open{display:flex}
+.sheet{background:var(--surface);width:100%;max-width:560px;max-height:92dvh;overflow:auto;border-radius:26px 26px 0 0;padding:24px 22px calc(24px + env(safe-area-inset-bottom,0px));box-shadow:var(--shadow);animation:up .25s ease-out}
+@media (min-width:700px){.veil{align-items:center}.sheet{border-radius:26px}}
+@keyframes up{from{transform:translateY(24px);opacity:0}}
+@media (prefers-reduced-motion:reduce){.sheet{animation:none}html{scroll-behavior:auto}}
+.sheet h2{font-size:28px;line-height:1.1}
+.row{display:flex;justify-content:space-between;align-items:center;gap:10px;margin-bottom:14px}
+.x{border:1px solid var(--line);background:none;border-radius:50%;width:36px;height:36px;flex:none}
+label,.lb{display:block;font-weight:600;font-size:14px;margin:16px 0 6px}
+input[type=text],select{width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;background:var(--bg)}
+.drop{display:grid;place-items:center;aspect-ratio:16/9;border:1.5px dashed var(--line);border-radius:18px;color:var(--muted);text-align:center;overflow:hidden;position:relative;background:var(--bg)}
+.drop img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.drop input{position:absolute;inset:0;opacity:0;cursor:pointer}
+.sw{display:flex;flex-wrap:wrap;gap:10px}
+.sw button{width:34px;height:34px;border-radius:50%;border:1px solid var(--line);padding:0}
+.sw button[aria-pressed="true"]{outline:3px solid var(--accent);outline-offset:2px}
+.pv{margin:14px 0 0;color:var(--muted);font-size:14px}
+.pv b{color:var(--ink)}
+.save{width:100%;margin-top:20px}
+.pick{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.pk{border:0;background:none;padding:0;text-align:left;font-size:13px;line-height:1.25}
+.pk .frame{border-radius:14px;margin-bottom:5px}
+.pk[aria-pressed="true"] .frame{outline:3px solid var(--accent);outline-offset:2px}
+.items{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-top:6px}
+.mini{display:flex;align-items:center;gap:10px;font-size:14px;line-height:1.25}
+.mini .m{width:38px;height:38px;border-radius:10px;overflow:hidden;position:relative;flex:none;display:grid;place-items:center}
+.mini .m img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.mini svg{width:20px;height:20px}
+.acts{display:flex;gap:10px;margin-top:20px}.acts .btn{flex:1;text-align:center}
+.toast{position:fixed;left:50%;bottom:calc(88px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--ink);color:var(--bg);padding:10px 18px;border-radius:999px;font-weight:500;opacity:0;pointer-events:none;transition:opacity .2s;z-index:30;max-width:90vw}
+.toast.on{opacity:1}
+</style>
+</head>
+<body>
+<div id="landing" class="wrap">
+  <div class="top"><span class="logo">Гардероб</span><a class="pill" href="#app">Влез</a></div>
+  <section class="hero">
+    <div>
+      <h1>Облечи се за секунди.</h1>
+      <p>Качи снимки на дрехите си, опиши ги с тип, цвят и марка, а Гардероб събира аутфитите вместо теб.</p>
+      <div class="cta"><a class="btn" href="#app">Започни безплатно</a><button class="btn alt" id="how">Как работи</button></div>
+    </div>
+    <div class="demo">
+      <div class="frame"><div class="collage" id="heroC"></div></div>
+      <p id="heroN"></p>
+      <button class="btn alt" id="heroB" style="padding:10px 20px">Друг аутфит</button>
+    </div>
+  </section>
+  <ol class="steps" id="steps">
+    <li><b>1</b><div><h3>Качи дрехите си</h3><p>Снимай тениската, дънките или маратонките. Всяка дреха влиза в твоя гардероб със собствена снимка.</p></div></li>
+    <li><b>2</b><div><h3>Опиши ги</h3><p>Избери тип, цвят и марка. Така „Черна тениска Nike“ се записва сама и се търси лесно.</p></div></li>
+    <li><b>3</b><div><h3>Получи аутфит</h3><p>Събери го сам от своите дрехи или натисни „Генерирай“ и Гардероб предлага комбинации, които си пасват по цвят.</p></div></li>
+  </ol>
+  <section class="band"><h2>Първият ти аутфит е на няколко снимки разстояние.</h2><a class="btn" href="#app">Отвори гардероба</a><p class="foot">Гардероб. Твоите дрехи, подредени.</p></section>
+</div>
+
+<div id="appv" class="wrap appt" hidden>
+  <div class="top"><a class="logo" href="#">← Гардероб</a><button class="pill" id="signin">Вход</button></div>
+  <h1 id="ttl">Моят гардероб</h1>
+  <p class="sub" id="count"></p>
+  <div class="tabs" role="tablist"><button role="tab" id="t-outfits">Аутфити</button><button role="tab" id="t-items">Дрехи</button></div>
+  <div class="tools" id="tools"><button class="btn" id="gen">Генерирай за мен</button><button class="btn alt" id="newo">Нов аутфит</button></div>
+  <div class="chips" id="chips"></div>
+  <div class="grid" id="grid"></div>
+  <button class="fab" id="add">+ Добави дреха</button>
+</div>
+
+<div class="veil" id="veil"><div class="sheet" role="dialog" aria-modal="true" id="sheet"></div></div>
+<div class="toast" id="toast" role="status"></div>
+
+<script>
+var TY=[['Тениска','top',2],['Риза','top',2],['Суитшърт','top',1],['Пуловер','top',1],['Дънки','bottom',4],['Панталон','bottom',1],['Шорти','bottom',4],['Яке','outer',3],['Палто','outer',3],['Маратонки','shoes',4],['Обувки','shoes',4],['Боти','shoes',4],['Аксесоар','acc',3]];
+var CO=[['#151515','Черен','Черна','Черно','Черни'],['#F2F2F2','Бял','Бяла','Бяло','Бели'],['#8A8D96','Сив','Сива','Сиво','Сиви'],['#1F3A6E','Син','Синя','Синьо','Сини'],['#D63A3A','Червен','Червена','Червено','Червени'],['#3F8F5A','Зелен','Зелена','Зелено','Зелени'],['#F2C94C','Жълт','Жълта','Жълто','Жълти'],['#CDB89A','Бежов','Бежова','Бежово','Бежови'],['#6B4A33','Кафяв','Кафява','Кафяво','Кафяви'],['#E88FB4','Розов','Розова','Розово','Розови']];
+var NEU=[0,1,2,3,7,8];
+var CATS={top:'Горнища',bottom:'Долнища',outer:'Връхни',shoes:'Обувки',acc:'Аксесоари'};
+var ORD=['top','outer','bottom','shoes','acc'];
+var OCC=['Ежедневни','Работа','Вечер','Спорт'];
+var ICON={top:'M8 4l-5 3 2 4 2-1v10h10V10l2 1 2-4-5-3a4 4 0 0 1-8 0z',bottom:'M7 3h10l1 18h-5l-1-9-1 9H6z',outer:'M9 3L4 6v15h5V10h6v11h5V6l-5-3-3 3z',shoes:'M3 14c4 0 5-3 6-6l3 2c1 1 3 2 6 2 2 0 3 1 3 3v2H3z',acc:'M9 3h6l1 4H8zM9 21h6l1-4H8zM12 7a5 5 0 1 0 0 10 5 5 0 0 0 0-10z'};
+var $=function(i){return document.getElementById(i)};
+function esc(s){return String(s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+function ink(h){var n=parseInt(h.slice(1),16);return(.299*(n>>16)+.587*(n>>8&255)+.114*(n&255))>150?'#15161F':'#fff'}
+function icon(c,col){return '<svg viewBox="0 0 24 24" fill="'+col+'"><path d="'+ICON[c]+'"/></svg>'}
+function cat(it){return TY[it.ty][1]}
+function mk(ty,co,br){return CO[co][TY[ty][2]]+' '+TY[ty][0].toLowerCase()+(br?' '+br:'')}
+var items=[],outfits=[],nid=100,S={tab:'outfits',f:{outfits:'all',items:'all'},sel:[],edit:null,gen:null,seen:{},ty:0,co:0,img:null};
+function demo(id,ty,co,br){items.push({id:id,ty:ty,co:co,brand:br,img:null,name:mk(ty,co,br)})}
+demo(1,0,1,'Nike');demo(2,4,3,'Levi’s');demo(3,7,5,'');demo(4,9,1,'Adidas');demo(5,1,0,'Zara');demo(6,5,0,'');demo(7,11,8,'');
+outfits.push({id:1,name:'Градски уикенд',occ:'Ежедневни',items:[1,2,3,4],tpl:true},{id:2,name:'Офис понеделник',occ:'Работа',items:[5,6,7],tpl:true});
+function byId(id){return items.filter(function(i){return i.id===id})[0]}
+function tile(it){var c=CO[it.co][0];return it.img?'<div class="tile"><img src="'+it.img+'" alt=""></div>':'<div class="tile" style="background:'+c+'">'+icon(cat(it),ink(c))+'</div>'}
+function collage(ids){return ids.map(byId).filter(Boolean).sort(function(a,b){return ORD.indexOf(cat(a))-ORD.indexOf(cat(b))}).map(tile).join('')}
+function list(ids){return '<div class="items">'+ids.map(byId).filter(Boolean).map(function(it){var c=CO[it.co][0];return '<div class="mini"><span class="m" style="background:'+c+'">'+(it.img?'<img src="'+it.img+'" alt="">':icon(cat(it),ink(c)))+'</span>'+esc(it.name)+'</div>'}).join('')+'</div>'}
+function oCard(o){return '<button class="card" data-o="'+o.id+'"><div class="frame"><div class="collage">'+collage(o.items)+'</div></div><h3>'+esc(o.name)+'</h3><p>'+esc(o.occ)+(o.tpl?', шаблон':'')+'</p></button>'}
+function iCard(it){return '<div class="card"><div class="frame item"><div class="collage">'+tile(it)+'</div></div><h3>'+esc(it.name)+'</h3><p>'+esc(it.brand||CATS[cat(it)])+'</p></div>'}
+function render(){
+  var out=S.tab==='outfits';
+  $('t-outfits').setAttribute('aria-selected',out);$('t-items').setAttribute('aria-selected',!out);
+  $('tools').hidden=!out;
+  $('count').textContent=outfits.length+' аутфита, '+items.length+' дрехи';
+  var opts=[['all','Всички']].concat(out?OCC.map(function(o){return[o,o]}):Object.keys(CATS).map(function(k){return[k,CATS[k]]}));
+  $('chips').innerHTML=opts.map(function(p){return '<button class="chip" data-f="'+p[0]+'" aria-pressed="'+(S.f[S.tab]===p[0])+'">'+p[1]+'</button>'}).join('');
+  var f=S.f[S.tab],l=out?outfits.filter(function(o){return f==='all'||o.occ===f}):items.filter(function(i){return f==='all'||cat(i)===f});
+  $('grid').innerHTML=l.length?l.map(out?oCard:iCard).join(''):'<div class="empty">Тук още няма нищо. '+(out?'Натисни „Генерирай за мен“.':'Качи първата дреха с „Добави дреха“.')+'</div>';
+}
+function openS(h){$('sheet').innerHTML=h;$('veil').classList.add('open')}
+function closeS(){$('veil').classList.remove('open')}
+function toast(t){var e=$('toast');e.textContent=t;e.classList.add('on');setTimeout(function(){e.classList.remove('on')},2400)}
+function head(t){return '<div class="row"><h2>'+t+'</h2><button class="x" data-close="1" aria-label="Затвори">✕</button></div>'}
+function pick(a){return a[Math.floor(Math.random()*a.length)]}
+function gen(){
+  var by={top:[],bottom:[],outer:[],shoes:[],acc:[]};items.forEach(function(i){by[cat(i)].push(i)});
+  if(!by.top.length||!by.bottom.length)return null;
+  var best=null,bs=-99;
+  for(var k=0;k<40;k++){
+    var t=pick(by.top),b=pick(by.bottom),c=[t,b];
+    if(by.shoes.length)c.push(pick(by.shoes));
+    if(by.outer.length&&Math.random()<.6)c.push(pick(by.outer));
+    if(by.acc.length&&Math.random()<.4)c.push(pick(by.acc));
+    var ids=c.map(function(i){return i.id}),key=ids.slice().sort().join(),ch={};
+    c.forEach(function(i){if(NEU.indexOf(i.co)<0)ch[i.co]=1});
+    var n=Object.keys(ch).length,sc=(n===0?1:0)-2*Math.max(0,n-1)-(t.co===b.co?3:0)-(S.seen[key]?5:0)+Math.random();
+    if(sc>bs){bs=sc;best=ids}
+  }
+  S.seen[best.slice().sort().join()]=1;return best;
+}
+function genSheet(){
+  S.gen=gen();
+  if(!S.gen){toast('Качи поне едно горнище и един долен вид дреха');return}
+  openS(head('Предложение')+'<div class="frame sq"><div class="collage">'+collage(S.gen)+'</div></div><div class="lb">Дрехи в аутфита</div>'+list(S.gen)+'<div class="acts"><button class="btn alt" data-regen="1">Друг вариант</button><button class="btn" data-savegen="1">Запази</button></div>');
+}
+function outfitSheet(id){
+  var o=outfits.filter(function(x){return x.id===id})[0];
+  openS(head(esc(o.name))+'<div class="frame sq"><div class="collage">'+collage(o.items)+'</div></div><div class="lb">Дрехи в аутфита</div>'+list(o.items)+'<div class="acts"><button class="btn alt" data-edit="'+id+'">Промени дрехите</button></div>');
+}
+function builder(id){
+  var o=id?outfits.filter(function(x){return x.id===id})[0]:null;
+  S.edit=id||null;S.sel=o?o.items.slice():[];
+  if(!items.length){openS(head('Нов аутфит')+'<p class="sub">Първо качи няколко дрехи, за да ги съчетаеш.</p><div class="acts"><button class="btn" data-add="1">Добави дреха</button></div>');return}
+  openS(head(o?'Промени аутфита':'Нов аутфит')+'<label for="on">Име</label><input type="text" id="on" value="'+(o?esc(o.name):'')+'" placeholder="Напр. Градски уикенд"><label for="oc">Повод</label><select id="oc">'+OCC.map(function(x){return '<option'+(o&&o.occ===x?' selected':'')+'>'+x+'</option>'}).join('')+'</select><div class="lb">Избери дрехи от гардероба си</div><div class="pick">'+items.map(function(it){return '<button type="button" class="pk" data-pk="'+it.id+'" aria-pressed="'+(S.sel.indexOf(it.id)>=0)+'"><span class="frame item"><span class="collage">'+tile(it)+'</span></span>'+esc(it.name)+'</button>'}).join('')+'</div><button class="btn save" data-saveo="1">Запази аутфита</button>');
+}
+function addSheet(){
+  S.ty=0;S.co=0;S.img=null;
+  openS(head('Нова дреха')+'<div class="drop" id="drop"><span>Избери или снимай дрехата</span><input type="file" accept="image/*" id="file" aria-label="Снимка"></div>'+
+  '<label for="ty">Вид</label><select id="ty">'+TY.map(function(t,i){return '<option value="'+i+'">'+t[0]+'</option>'}).join('')+'</select>'+
+  '<div class="lb">Цвят</div><div class="sw">'+CO.map(function(c,i){return '<button type="button" data-co="'+i+'" aria-label="'+c[1]+'" aria-pressed="'+(i===0)+'" style="background:'+c[0]+'"></button>'}).join('')+'</div>'+
+  '<label for="br">Марка</label><input type="text" id="br" list="brs" placeholder="Напр. Nike" autocomplete="off"><datalist id="brs"><option>Nike</option><option>Adidas</option><option>Zara</option><option>H&amp;M</option><option>Levi’s</option><option>Puma</option></datalist>'+
+  '<p class="pv">Ще се казва: <b id="pv"></b></p><button class="btn save" data-saveit="1">Запази дрехата</button>');
+  pv();
+}
+function pv(){$('pv').textContent=mk(S.ty,S.co,$('br').value.trim())}
+function hero(){var g=gen();if(!g)return;$('heroC').innerHTML=collage(g);$('heroN').textContent=g.map(function(i){return byId(i).name}).join(', ')}
+document.addEventListener('click',function(e){
+  var t=e.target.closest('button');if(!t)return;var d=t.dataset;
+  if(d.o)outfitSheet(+d.o);
+  else if(d.f){S.f[S.tab]=d.f;render()}
+  else if(d.close)closeS();
+  else if(d.co){S.co=+d.co;document.querySelectorAll('.sw button').forEach(function(b){b.setAttribute('aria-pressed',b===t)});pv()}
+  else if(d.pk){var id=+d.pk,i=S.sel.indexOf(id);if(i<0)S.sel.push(id);else S.sel.splice(i,1);t.setAttribute('aria-pressed',i<0)}
+  else if(d.edit)builder(+d.edit);
+  else if(d.add)addSheet();
+  else if(d.regen)genSheet();
+  else if(d.savegen){var f=byId(S.gen.filter(function(i){return cat(byId(i))==='top'})[0]);outfits.unshift({id:nid++,name:'Аутфит: '+f.name,occ:'Ежедневни',items:S.gen});S.tab='outfits';S.f.outfits='all';closeS();render();toast('Аутфитът е запазен')}
+  else if(d.saveo){
+    if(!S.sel.length){toast('Избери поне една дреха');return}
+    var nm=$('on').value.trim()||'Аутфит '+(outfits.length+1),oc=$('oc').value;
+    if(S.edit){var o=outfits.filter(function(x){return x.id===S.edit})[0];o.name=nm;o.occ=oc;o.items=S.sel.slice();o.tpl=false}
+    else outfits.unshift({id:nid++,name:nm,occ:oc,items:S.sel.slice()});
+    S.tab='outfits';S.f.outfits='all';closeS();render();toast('Аутфитът е запазен');
+  }
+  else if(d.saveit){var br=$('br').value.trim();items.unshift({id:nid++,ty:S.ty,co:S.co,brand:br,img:S.img,name:mk(S.ty,S.co,br)});S.tab='items';S.f.items='all';closeS();render();toast('Дрехата е добавена')}
+  else if(t.id==='t-outfits'){S.tab='outfits';render()}
+  else if(t.id==='t-items'){S.tab='items';render()}
+  else if(t.id==='add')addSheet();
+  else if(t.id==='gen')genSheet();
+  else if(t.id==='newo')builder();
+  else if(t.id==='signin')toast('Тук ще е входът с Clerk');
+  else if(t.id==='heroB')hero();
+  else if(t.id==='how')$('steps').scrollIntoView();
+});
+document.addEventListener('change',function(e){
+  if(e.target.id==='ty'){S.ty=+e.target.value;pv()}
+  if(e.target.id==='file'&&e.target.files[0]){S.img=URL.createObjectURL(e.target.files[0]);var d=$('drop'),im=d.querySelector('img');if(!im){im=document.createElement('img');im.alt='';d.appendChild(im)}im.src=S.img}
+});
+document.addEventListener('input',function(e){if(e.target.id==='br')pv()});
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeS()});
+$('veil').addEventListener('click',function(e){if(e.target.id==='veil')closeS()});
+function route(){var a=location.hash==='#app';$('landing').hidden=a;$('appv').hidden=!a;window.scrollTo(0,0);if(a)render()}
+window.addEventListener('hashchange',route);
+hero();route();
+</script>
+</body>
+</html>
