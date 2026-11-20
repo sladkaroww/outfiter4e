@@ -124,7 +124,7 @@ The command prints the PostgreSQL version, the tables it verified and current
 row counts. It uses `DATABASE_URL_UNPOOLED` when present because schema changes
 should not go through the connection pooler.
 
-## Troubleshooting “nothing is saved”
+## Troubleshooting "nothing is saved"
 
 Open **`/api/health`** — it reports whether the database is configured,
 reachable, whether the schema is applied, and whether image storage is ready.
