@@ -1,27 +1,3 @@
 name = "outfiterapp"
-main = ".open-next/worker.js"
 compatibility_date = "2026-11-22"
-
-[observability]
-enabled = true
-
-[assets]
-directory = ".open-next/assets"
-binding = "ASSETS"
-
-[[kv_namespaces]]
-binding = "INCREMENTAL_CACHE"
-id = "incremental-cache-id"
-
-[[kv_namespaces]]
-binding = "TAG_CACHE"
-id = "tag-cache-id"
-
-[queues]
-binding = "REVALIDATION_QUEUE"
-queue_name = "revalidation-queue"
-
-[[d1_databases]]
-binding = "DB"
-database_name = "outfiter-db"
-database_id = "db-id"
+pages_build_output_dir = ".open-next"
