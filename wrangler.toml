@@ -17,7 +17,7 @@ id = "incremental-cache-id"
 binding = "TAG_CACHE"
 id = "tag-cache-id"
 
-[[queues]]
+[queues]
 binding = "REVALIDATION_QUEUE"
 queue_name = "revalidation-queue"
 
