@@ -1,6 +1,6 @@
-import { SiteFooter } from "@/components/site-footer";
-import { SiteHeader } from "@/components/site-header";
-import { AppButton } from "@/components/ui";
+import SiteFooter from "@/components/site-footer";
+import SiteHeader from "@/components/site-header";
+import AppButton from "@/components/ui/app-button";
 
 export default function NotFound() {
   return (
